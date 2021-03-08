@@ -9,7 +9,7 @@ import { DashboardService } from '../dashboard.service';
 
 @Injectable()
 export class ProductEffects {
-  search$ = createEffect(() => this.actions$.pipe(
+  getAllBudgets$ = createEffect(() => this.actions$.pipe(
     ofType(DashboardActions.getAll),
     switchMap(() => this.service.getAllBudgets().pipe(
       map((Budgets: any) => {
@@ -21,7 +21,7 @@ export class ProductEffects {
     )),
   ));
 
-  search2$ = createEffect(() => this.actions$.pipe(
+  getAllAccounts$ = createEffect(() => this.actions$.pipe(
     ofType(DashboardActions.getAllAccounts),
     switchMap(() => {
       console.log('88888', this.service.queryParamsValue);
@@ -36,7 +36,7 @@ export class ProductEffects {
     }),
   ));
 
-search3$ = createEffect(() => this.actions$.pipe(
+  getAllTransactions$ = createEffect(() => this.actions$.pipe(
   ofType(DashboardActions.getAllTransactions),
   switchMap(() => {
     console.log('88888', this.service.queryParamsValue);
@@ -51,7 +51,7 @@ search3$ = createEffect(() => this.actions$.pipe(
   }),
 ));
 
-search4$ = createEffect(() => this.actions$.pipe(
+createAccount$ = createEffect(() => this.actions$.pipe(
   ofType(DashboardActions.createAccount),
   switchMap((action) => {
     console.log('88888', this.service.queryParamsValue);
