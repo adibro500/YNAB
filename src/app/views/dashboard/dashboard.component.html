@@ -1,0 +1,80 @@
+<div class="animated fadeIn">
+
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-5">
+          <h4 class="card-title mb-0"></h4>
+          <div class="small text-muted"></div>
+        </div>
+        <!--/.col-->
+        <div class="col-sm-7 d-none d-md-block">
+
+        </div>
+        <!--/.col-->
+      </div>
+      <!--/.row-->
+      <div class="chart-wrapper" style="height:500px;margin-top:40px;">
+        <!-- {{ results?.budgets?.Budgets?.data?.budgets | json }} -->
+        <h4>Budgets List</h4>
+        <br>
+        <div style="overflow-x: scroll;">
+        <p-table [scrollable]="true"
+          [style]="{width: '2000px'}"
+          scrollHeight="300px"
+          [value]="results?.budgets?.Budgets?.data?.budgets" styleClass="p-datatable-striped p-datatable-gridlines">
+          <ng-template pTemplate="header">
+            <tr>
+              <th colspan="5"></th>
+              <th colspan="8">Currency Format</th> 
+              <th colspan="2">Actions</th> 
+            </tr>
+            <tr style="background-color: rgba(0,0,0,.15) !important;">
+              <th>Name</th>
+              <th>Modified On</th>
+              <th>First Month</th>
+              <th>Last Month</th>
+              <th>Date Format</th>
+              <th>Iso Code</th>
+              <th>Example Format</th>
+              <th>Decimal Digits</th>
+              <th>Decimal Saparator</th>
+              <th>Symbol First</th>
+              <th>Group Saparator</th>
+              <th>Currency Symbol</th>
+              <th>Display Symbol</th>
+              <th colspan="2"></th>
+              
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-budget>
+            <tr> 
+              <td>{{budget.name}}</td>
+              <td>{{budget.last_modified_on.split('T')[0]}}</td>
+              <td>{{budget.first_month}}</td>
+              <td>{{budget.last_month}}</td>
+              <td>{{budget.date_format.format}}</td>
+              <td>{{budget.currency_format.iso_code}}</td>
+              <td>{{budget.currency_format.example_format}}</td>
+              <td>{{budget.currency_format.decimal_digits}}</td>
+              <td>{{budget.currency_format.decimal_separator}}</td>
+              <td><p-checkbox name="groupname" [(ngModel)]="budget.currency_format.symbol_first" binary="true" disabled="true"></p-checkbox></td>
+              <td>{{budget.currency_format.group_separator}}</td>
+              <td>{{budget.currency_format.currency_symbol}}</td>
+              <td><p-checkbox name="groupname2" [(ngModel)]="budget.currency_format.display_symbol" binary="true" disabled="true"> </p-checkbox></td>
+              <td>
+                <p-button (click)="navigateToAccounts(budget.id)">Accounts </p-button>
+              </td>
+              <td>
+              <p-button (click)="navigateToTransactions(budget.id)">Transactions</p-button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

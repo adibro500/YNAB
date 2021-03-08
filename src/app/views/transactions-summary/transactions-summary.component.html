@@ -1,0 +1,60 @@
+<div class="animated fadeIn">
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h4 class="card-title mb-0"></h4>
+                    <div class="small text-muted"></div>
+                </div>
+                <!--/.col-->
+                <div class="col-sm-7 d-none d-md-block">
+
+                </div>
+                <!--/.col-->
+            </div>
+            <!--/.row-->
+            <div class="chart-wrapper" style="height:500px;margin-top:40px;">
+                <!-- {{ results?.budgets?.Budgets?.data?.budgets | json }} -->
+                <h4>Transactions List</h4>
+                <br>
+
+                <p-table [scrollable]="true"
+                    style="font-size: 10px !important;width:600px;border: 1px solid rgba(0,0,0,.15) !important;"
+                    sortField="balance" sortOrder="-1" [value]="results?.budgets?.Transactions?.data?.transactions"
+                    styleClass="p-datatable-striped p-datatable-gridlines"
+                    scrollHeight="300px"
+                    >
+                    <ng-template pTemplate="header">
+                        <tr style="background-color: rgba(0,0,0,.15) !important;">
+                            <th>Account Name</th>
+                            <th>Amount</th>
+                            <th>Approved</th>
+                            <th>Category Name</th>
+                            <th>Cleared</th>
+                            <th>Date</th>
+                            <th>Deleted</th>
+                            <th>Flag Color</th>
+                            <th>Payee Name</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-budget>
+                        <tr>
+                            <td>{{budget.account_name}}</td>
+                            <td>{{budget.amount}}</td>
+                            <td><p-checkbox name="groupname" [(ngModel)]="budget.approved" binary="true" disabled="true"> </p-checkbox></td>
+                            <td>{{budget.category_name}}</td>
+                            <td>{{budget.cleared}}</td>
+                            <td>{{budget.date}}</td>
+                            <td><p-checkbox name="groupname" [(ngModel)]="budget.deleted" binary="true" disabled="true"> </p-checkbox></td>
+                            <td>{{budget.flag_color}}</td>
+                            <td>{{budget.payee_name}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+
+    </div>
+
+</div>

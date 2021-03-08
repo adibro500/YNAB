@@ -1,0 +1,94 @@
+<div class="animated fadeIn">
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h4 class="card-title mb-0"></h4>
+                    <div class="small text-muted"></div>
+                </div>
+                <!--/.col-->
+                <div class="col-sm-7 d-none d-md-block">
+
+                </div>
+                <!--/.col-->
+            </div>
+            <!--/.row-->
+            <div class="chart-wrapper" style="height:500px;margin-top:40px;">
+                <!-- {{ results?.budgets?.Budgets?.data?.budgets | json }} -->
+                <h4>Accounts List</h4>
+                <br>
+                <button type="button" class="btn btn-primary" (click)="openModal(template)">New Account</button>
+
+                <br>
+                <p-table #table [scrollable]="true"       
+                    style="font-size: 10px !important;width:500px;border: 1px solid rgba(0,0,0,.15) !important;"
+                    [value]="results?.budgets?.Accounts?.data?.accounts"
+                    sortField="balance"
+                    sortOrder="-1"
+                    scrollHeight="300px"
+                    styleClass="p-datatable-striped p-datatable-gridlines"
+                    >
+                    <ng-template pTemplate="header">
+                        <tr style="background-color: rgba(0,0,0,.15) !important;">
+                            <th>Balance</th>
+                            <th>Cleared Balance</th>
+                            <th>Closed</th>
+                            <th>Deleted</th>
+                            <th>Name</th>
+                            <th>Note</th>
+                            <th>On Budget ?</th>
+                            <th>Type</th>
+                            <th>Uncleared Balance</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-budget>
+                        <tr>
+                            <td>{{budget.balance}}</td>
+                            <td>{{budget.cleared_balance}}</td>
+                            <td><p-checkbox name="groupname2" [(ngModel)]="budget.closed" binary="true" disabled="true"> </p-checkbox></td>
+                            <td><p-checkbox name="groupname" [(ngModel)]="budget.deleted" binary="true" disabled="true"> </p-checkbox></td>
+                            <td>{{budget.name}}</td>
+                            <td>{{budget.note}}</td>
+                            <td><p-checkbox name="groupname" [(ngModel)]="budget.on_budget" binary="true" disabled="true"> </p-checkbox></td>
+                            <td>{{budget.type}}</td>
+                            <td>{{budget.uncleared_balance}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Create Account</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" style="text-align: center;">
+        <form #accountsForm="ngForm">
+        <div class="col-sm-12">
+        <input type="text" pInputText placeholder="Enter Name" [(ngModel)]="newAccount.account.name" name="accName" required/>
+        </div>
+       <br>
+            <div class="col-sm-12">
+        <!-- <input type="text" pInputText placeholder="Enter Type" [(ngModel)]="newAccount.account.type"/> -->
+        <p-dropdown [options]="typesOfAccounts" [(ngModel)]="newAccount.account.type" optionLabel="name" optionValue="code" name="accType" required></p-dropdown>
+
+        </div>
+        <br>
+        <div class="col-sm-12">
+        <input type="text" pInputText placeholder="Enter Balance" [(ngModel)]="newAccount.account.balance" name="accBalance" required/>
+        </div>
+        <br>
+        <div class="col-sm-12">
+        <button type="submit" [disabled]="!accountsForm.form.valid" class="btn btn-primary" (click)="createAccount()">Create</button>
+        </div>
+        </form>
+    </div>
+  </ng-template>

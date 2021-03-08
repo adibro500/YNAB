@@ -1,0 +1,8 @@
+{
+    "/v1": {
+      "target": "http://api.youneedabudget.com",
+      "secure": false,
+      "changeOrigin": true
+    }
+    
+  }
