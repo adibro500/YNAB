@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
     this.store$.pipe(select((state) => state)).subscribe((res: any) => {
       this.results = res;
     });
-    console.log(this.results);
+    // console.log(this.results);
   }
 
   navigateToAccounts(accountId) {

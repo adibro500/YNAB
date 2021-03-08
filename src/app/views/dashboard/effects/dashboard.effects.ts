@@ -24,7 +24,7 @@ export class ProductEffects {
   getAllAccounts$ = createEffect(() => this.actions$.pipe(
     ofType(DashboardActions.getAllAccounts),
     switchMap(() => {
-      console.log('88888', this.service.queryParamsValue);
+      // console.log('88888', this.service.queryParamsValue);
 
       // console.log('55555', Accounts);
       return this.service.getAllAccountsById(this.service.queryParamsValue.value).pipe(
@@ -39,7 +39,7 @@ export class ProductEffects {
   getAllTransactions$ = createEffect(() => this.actions$.pipe(
   ofType(DashboardActions.getAllTransactions),
   switchMap(() => {
-    console.log('88888', this.service.queryParamsValue);
+    // console.log('88888', this.service.queryParamsValue);
 
     // console.log('55555', Accounts);
     return this.service.getAllTransactionsById(this.service.queryParamsValue.value).pipe(
@@ -54,7 +54,6 @@ export class ProductEffects {
 createAccount$ = createEffect(() => this.actions$.pipe(
   ofType(DashboardActions.createAccount),
   switchMap((action) => {
-    console.log('88888', this.service.queryParamsValue);
 
     // console.log('55555', Accounts);
     return this.service.createAccount(action.BudgetId, action.Body).pipe(

@@ -18,7 +18,7 @@ export class TransactionsSummaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: any) => {
-      console.log(params.params.accountId);
+      // console.log(params.params.accountId);
       this.service.queryParamsValue.next(params.params.accountId);
       this.service.queryParamsValue.subscribe((val: any) => {
         this.store$.dispatch(DashboardActions.getAllTransactions(val));
@@ -26,7 +26,7 @@ export class TransactionsSummaryComponent implements OnInit {
         this.store$.pipe(select((state) => state)).subscribe((res: any) => {
           this.results = res;
         });
-        console.log(this.results);
+        // console.log(this.results);
       });
     });
   }

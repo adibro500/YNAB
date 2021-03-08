@@ -51,7 +51,7 @@ selectedType: any;
 
   initData() {
     this.route.paramMap.subscribe((params: any) => {
-      console.log(params.params.accountId);
+      // console.log(params.params.accountId);
       this.service.queryParamsValue.next(params.params.accountId);
       this.service.queryParamsValue.subscribe((val: any) => {
         this.store$.dispatch(DashboardActions.getAllAccounts(val));
