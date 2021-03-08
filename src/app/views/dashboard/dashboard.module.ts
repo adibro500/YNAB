@@ -23,18 +23,6 @@ import { DashboardService } from './dashboard.service';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 
-export function storageMetaReducer<S, A extends Action = Action>(reducer: ActionReducer<S, A>) {
-  return function (state: S, action: A): S {
-    const nextState = reducer(state, action);
-    const savedState = JSON.parse(localStorage.getItem('__storage__')) || {};
-    merge(nextState, savedState);
-    localStorage.setItem('__storage__', nextState.toString());
-    return nextState;
-  };
-}
-
-export const metaReducers: MetaReducer<any>[] = [storageMetaReducer];
-
 @NgModule({
   imports: [
     FormsModule,
