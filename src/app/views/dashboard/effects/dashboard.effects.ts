@@ -11,28 +11,27 @@ import { DashboardService } from '../dashboard.service';
 export class ProductEffects {
   search$ = createEffect(() => this.actions$.pipe(
     ofType(DashboardActions.getAll),
-    switchMap(() => this.googleBooks.getAllBudgets().pipe(
+    switchMap(() => this.service.getAllBudgets().pipe(
       map((Budgets: any) => {
-        console.log('55555', Budgets);
         return DashboardActions.budgetsLoadedSuccess({ Budgets });
       }),
-      // catchError((err) =>
-      //   of(DashboardActioyns.searchFailure({ errorMsg: err.message }))
-      // )
+      catchError((err) =>
+        of(DashboardActions.apiError({ ErrorMsg: err.message }))
+      )
     )),
   ));
 
   search2$ = createEffect(() => this.actions$.pipe(
     ofType(DashboardActions.getAllAccounts),
     switchMap(() => {
-      console.log('88888', this.googleBooks.queryParamsValue);
+      console.log('88888', this.service.queryParamsValue);
 
       // console.log('55555', Accounts);
-      return this.googleBooks.getAllAccountsById(this.googleBooks.queryParamsValue.value).pipe(
+      return this.service.getAllAccountsById(this.service.queryParamsValue.value).pipe(
         map((Accounts: any) => DashboardActions.accountsLoadedSuccess({ Accounts })),
-        // catchError((err) =>
-        //   of(DashboardActioyns.searchFailure({ errorMsg: err.message }))
-        // )
+        catchError((err) =>
+          of(DashboardActions.apiError({ ErrorMsg: err.message }))
+        )
       );
     }),
   ));
@@ -40,14 +39,14 @@ export class ProductEffects {
 search3$ = createEffect(() => this.actions$.pipe(
   ofType(DashboardActions.getAllTransactions),
   switchMap(() => {
-    console.log('88888', this.googleBooks.queryParamsValue);
+    console.log('88888', this.service.queryParamsValue);
 
     // console.log('55555', Accounts);
-    return this.googleBooks.getAllTransactionsById(this.googleBooks.queryParamsValue.value).pipe(
+    return this.service.getAllTransactionsById(this.service.queryParamsValue.value).pipe(
       map((Transactions: any) => DashboardActions.transactionsLoadedSuccess({ Transactions })),
-      // catchError((err) =>
-      //   of(DashboardActioyns.searchFailure({ errorMsg: err.message }))
-      // )
+      catchError((err) =>
+        of(DashboardActions.apiError({ ErrorMsg: err.message }))
+      )
     );
   }),
 ));
@@ -55,20 +54,20 @@ search3$ = createEffect(() => this.actions$.pipe(
 search4$ = createEffect(() => this.actions$.pipe(
   ofType(DashboardActions.createAccount),
   switchMap((action) => {
-    console.log('88888', this.googleBooks.queryParamsValue);
+    console.log('88888', this.service.queryParamsValue);
 
     // console.log('55555', Accounts);
-    return this.googleBooks.createAccount(action.BudgetId, action.Body).pipe(
+    return this.service.createAccount(action.BudgetId, action.Body).pipe(
       map((Success: any) => DashboardActions.accountCreatedSuccess({ Success })),
-      // catchError((err) =>
-      //   of(DashboardActioyns.searchFailure({ errorMsg: err.message }))
-      // )
+      catchError((err) =>
+        of(DashboardActions.apiError({ ErrorMsg: err.message }))
+      )
     );
   }),
 ));
 
 constructor(
     private actions$: Actions,
-    private googleBooks: DashboardService,
+    private service: DashboardService,
 ) {}
 }

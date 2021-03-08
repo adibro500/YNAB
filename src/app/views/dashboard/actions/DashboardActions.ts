@@ -38,3 +38,8 @@ export const accountCreatedSuccess = createAction(
   '[Accounts] create account success',
   props<{Success: any}>(),
 );
+
+export const apiError = createAction(
+    '[Accounts] create account success',
+    props<{ErrorMsg: string}>(),
+  );
