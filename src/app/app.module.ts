@@ -28,8 +28,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AppRoutingModule } from './app.routing';
-import { RegisterComponent } from './views/register/register.component';
-import { LoginComponent } from './views/login/login.component';
 import { P500Component } from './views/error/500.component';
 import { P404Component } from './views/error/404.component';
 import { DefaultLayoutComponent } from './containers';
@@ -70,9 +68,7 @@ const APP_CONTAINERS = [
     AppComponent,
     ...APP_CONTAINERS,
     P404Component,
-    P500Component,
-    LoginComponent,
-    RegisterComponent,
+    P500Component
   ],
   providers: [
     {
